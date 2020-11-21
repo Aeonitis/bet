@@ -1,0 +1,218 @@
+[
+ {
+   "betId": "Bet-10",
+   "betTimestamp": 1489490156000,
+   "selectionId": 1,
+   "selectionName": " My Fair Lady",
+   "stake": 0.5,
+   "price": 6,
+   "currency": " GBP"
+ },
+ {
+   "betId": "Bet-11",
+   "betTimestamp": 1489490156000,
+   "selectionId": 2,
+   "selectionName": " Always a Runner",
+   "stake": 1.25,
+   "price": 4,
+   "currency": " EUR"
+ },
+ {
+   "betId": "Bet-12",
+   "betTimestamp": 1489230956000,
+   "selectionId": 4,
+   "selectionName": " Bilbo's Adventure",
+   "stake": 5,
+   "price": 4.5,
+   "currency": " GBP"
+ },
+ {
+   "betId": "Bet-13",
+   "betTimestamp": 1489403756000,
+   "selectionId": 3,
+   "selectionName": " Fan the Flames",
+   "stake": 4.5,
+   "price": 5.5,
+   "currency": " GBP"
+ },
+ {
+   "betId": "Bet-14",
+   "betTimestamp": 1489144556000,
+   "selectionId": 2,
+   "selectionName": " Always a Runner",
+   "stake": 7.9,
+   "price": 7,
+   "currency": " EUR"
+ },
+ {
+   "betId": "Bet-15",
+   "betTimestamp": 1489140956000,
+   "selectionId": 1,
+   "selectionName": " My Fair Lady",
+   "stake": 3.4,
+   "price": 6.5,
+   "currency": " EUR"
+ },
+ {
+   "betId": "Bet-16",
+   "betTimestamp": 1489227356000,
+   "selectionId": 4,
+   "selectionName": " Bilbo's Adventure",
+   "stake": 2.5,
+   "price": 6.5,
+   "currency": " GBP"
+ },
+ {
+   "betId": "Bet-17",
+   "betTimestamp": 1489313756000,
+   "selectionId": 2,
+   "selectionName": " Always a Runner",
+   "stake": 1.5,
+   "price": 11,
+   "currency": " EUR"
+ },
+ {
+   "betId": "Bet-18",
+   "betTimestamp": 1489310156000,
+   "selectionId": 2,
+   "selectionName": " Always a Runner",
+   "stake": 3.8,
+   "price": 5.5,
+   "currency": " GBP"
+ },
+ {
+   "betId": "Bet-19",
+   "betTimestamp": 1489482956000,
+   "selectionId": 3,
+   "selectionName": " Fan the Flames",
+   "stake": 3.4,
+   "price": 4,
+   "currency": " GBP"
+ },
+ {
+   "betId": "Bet-20",
+   "betTimestamp": 1489396556000,
+   "selectionId": 4,
+   "selectionName": " Bilbo's Adventure",
+   "stake": 2.25,
+   "price": 5,
+   "currency": " EUR"
+ },
+ {
+   "betId": "Bet-21",
+   "betTimestamp": 1489137356000,
+   "selectionId": 2,
+   "selectionName": " Always a Runner",
+   "stake": 5.4,
+   "price": 6.5,
+   "currency": " EUR"
+ },
+ {
+   "betId": "Bet-22",
+   "betTimestamp": 1489223756000,
+   "selectionId": 3,
+   "selectionName": " Fan the Flames",
+   "stake": 6.7,
+   "price": 6.5,
+   "currency": " GBP"
+ },
+ {
+   "betId": "Bet-23",
+   "betTimestamp": 1489310156000,
+   "selectionId": 3,
+   "selectionName": " Fan the Flames",
+   "stake": 1.1,
+   "price": 4.5,
+   "currency": " EUR"
+ },
+ {
+   "betId": "Bet-24",
+   "betTimestamp": 1489324556000,
+   "selectionId": 4,
+   "selectionName": " Bilbo's Adventure",
+   "stake": 2,
+   "price": 6.5,
+   "currency": " GBP"
+ },
+ {
+   "betId": "Bet-25",
+   "betTimestamp": 1489151756000,
+   "selectionId": 2,
+   "selectionName": " Always a Runner",
+   "stake": 3.2,
+   "price": 6,
+   "currency": " GBP"
+ },
+ {
+   "betId": "Bet-26",
+   "betTimestamp": 1489497356000,
+   "selectionId": 2,
+   "selectionName": " Always a Runner",
+   "stake": 4.2,
+   "price": 5,
+   "currency": " EUR"
+ },
+ {
+   "betId": "Bet-27",
+   "betTimestamp": 1489410956000,
+   "selectionId": 3,
+   "selectionName": " Fan the Flames",
+   "stake": 2.1,
+   "price": 4.5,
+   "currency": " EUR"
+ },
+ {
+   "betId": "Bet-28",
+   "betTimestamp": 1489324556000,
+   "selectionId": 1,
+   "selectionName": " My Fair Lady",
+   "stake": 7.8,
+   "price": 5.5,
+   "currency": " GBP"
+ },
+ {
+   "betId": "Bet-29",
+   "betTimestamp": 1489320956000,
+   "selectionId": 4,
+   "selectionName": " Bilbo's Adventure",
+   "stake": 6.2,
+   "price": 6.5,
+   "currency": " GBP"
+ },
+ {
+   "betId": "Bet-30",
+   "betTimestamp": 1489493756000,
+   "selectionId": 4,
+   "selectionName": " Bilbo's Adventure",
+   "stake": 8.4,
+   "price": 7.5,
+   "currency": " EUR"
+ },
+ {
+   "betId": "Bet-31",
+   "betTimestamp": 1489407356000,
+   "selectionId": 1,
+   "selectionName": " My Fair Lady",
+   "stake": 10.5,
+   "price": 7.3,
+   "currency": " GBP"
+ },
+ {
+   "betId": "Bet-32",
+   "betTimestamp": 1489320956000,
+   "selectionId": 3,
+   "selectionName": " Fan the Flames",
+   "stake": 5,
+   "price": 5.5,
+   "currency": " GBP"
+ },
+ {
+   "betId": "Bet-33",
+   "betTimestamp": 1489234556000,
+   "selectionId": 2,
+   "selectionName": " Always a Runner",
+   "stake": 0.75,
+   "price": 7,
+   "currency": " EUR"
+ }
+]
