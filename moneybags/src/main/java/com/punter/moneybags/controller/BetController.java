@@ -25,26 +25,6 @@ public class BetController {
         return "See Reports here!";
     }
 
-//    @PostMapping(value = "/upload", consumes = {"text/csv", "application/json"})
-//    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
-//        String message = "";
-//
-//        if (CSVHelper.hasCSVFormat(file)) {
-//            try {
-//                fileService.save(file);
-//
-//                message = "Uploaded the file successfully: " + file.getOriginalFilename();
-//                return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
-//            } catch (Exception e) {
-//                message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-//                return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
-//            }
-//        }
-//
-//        message = "Please upload a csv file!";
-//        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
-//    }
-
     @PostMapping("/post-csv")
 //    @PostMapping(value = "/upload-csv-file", consumes = {MediaType.APPLICATION_JSON})
     public String postCSV(@RequestParam("file") MultipartFile uploadedFile) {
@@ -52,19 +32,19 @@ public class BetController {
 
         if (!isNull(betCollectionRequest)) {
             System.out.println("WOO");
-            betService.calculateLiability(betCollectionRequest);
+            betService.calculateSelectionLiability(betCollectionRequest);
         } else {
             System.out.println("OH NO!OO. Bad Request!");
         }
 
-        return "cv-upload";
+        return "csv-upload";
     }
 
     @PostMapping(value = "/post-json", consumes = APPLICATION_JSON_VALUE)
     public String postJSON(@RequestBody List<Bet> betCollectionRequestBody) {
         BetCollectionRequest betCollectionRequest = convertBetListToBetCollectionRequest(betCollectionRequestBody);
 
-        betService.calculateLiability(betCollectionRequest);
+        betService.calculateSelectionLiability(betCollectionRequest);
 
         return "json-post";
     }

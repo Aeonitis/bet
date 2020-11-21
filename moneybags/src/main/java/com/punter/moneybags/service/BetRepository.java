@@ -1,14 +1,14 @@
 package com.punter.moneybags.service;
 
+import com.punter.moneybags.model.dao.LiabilityEntry;
+import com.punter.moneybags.model.dao.SelectionLiabilityReportOne;
 import com.punter.moneybags.model.request.BetCollectionRequest;
-import com.punter.moneybags.model.response.LiabilityResponse;
-import com.punter.moneybags.model.response.TotalLiabilityResponse;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BetRepository {
 
-    public LiabilityResponse calculateLiability(BetCollectionRequest betCollectionRequest);
+    public SelectionLiabilityReportOne calculateSelectionLiability(BetCollectionRequest betCollectionRequest);
 
-    public TotalLiabilityResponse calculateTotalLiability(BetCollectionRequest betCollectionRequest);
+    public LiabilityEntry calculateLiability(BetCollectionRequest betCollectionRequest);
 }

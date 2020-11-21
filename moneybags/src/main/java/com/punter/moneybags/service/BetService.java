@@ -1,21 +1,40 @@
 package com.punter.moneybags.service;
 
+import com.punter.moneybags.model.dao.LiabilityEntry;
+import com.punter.moneybags.model.dao.SelectionLiabilityReportOne;
 import com.punter.moneybags.model.request.BetCollectionRequest;
-import com.punter.moneybags.model.response.LiabilityResponse;
-import com.punter.moneybags.model.response.TotalLiabilityResponse;
 import org.springframework.stereotype.Service;
+
+import static com.punter.moneybags.util.BetUtil.convertRequestToReport;
+import static com.punter.moneybags.util.BetUtil.countTotalMatchesForPredicate;
 
 @Service
 public class BetService implements BetRepository {
 
     @Override
-    public LiabilityResponse calculateLiability(BetCollectionRequest betCollectionRequest) {
+    public SelectionLiabilityReportOne calculateSelectionLiability(BetCollectionRequest betCollectionRequest) {
         printRequest(betCollectionRequest);
+        SelectionLiabilityReportOne selectionLiabilityReportOne;
+
+        System.out.println(countTotalMatchesForPredicate(betCollectionRequest.getBets()));
+
+//        betCollectionRequest.getBets().forEach(eachEntry -> {
+//            SelectionLiabilityEntry.builder()
+//                    .selectionName(eachEntry.getSelectionName())
+//                    .currency(eachEntry.getCurrency())
+//
+////                    .totalBets(eachEntry.get)
+////                    .totalStakes(eachEntry.get)
+////                    .totalLiability(eachEntry.get)
+//                    .build();
+//                });
+
+        convertRequestToReport(betCollectionRequest);
         return null;
     }
 
     @Override
-    public TotalLiabilityResponse calculateTotalLiability(BetCollectionRequest betCollectionRequest) {
+    public LiabilityEntry calculateLiability(BetCollectionRequest betCollectionRequest) {
         return null;
     }
 
