@@ -8,7 +8,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BetRepository {
 
-    public SelectionLiabilityReportOne calculateSelectionLiability(BetCollectionRequest betCollectionRequest);
+  public SelectionLiabilityReportOne calculateSelectionLiability(
+      BetCollectionRequest betCollectionRequest);
 
-    public LiabilityEntry calculateLiability(BetCollectionRequest betCollectionRequest);
+  public LiabilityEntry calculateLiability(BetCollectionRequest betCollectionRequest);
 }
