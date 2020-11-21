@@ -27,7 +27,7 @@ public class BetUtil {
             // Parse CSV multipartFile to create a list of `Bet` objects
             try (Reader reader = new BufferedReader(new InputStreamReader(multipartFile.getInputStream()))) {
 
-                // create csv bean reader
+                // Bean reader
                 CsvToBean<Bet> csvToBean = new CsvToBeanBuilder(reader)
                         .withType(Bet.class)
                         .withIgnoreLeadingWhiteSpace(true)
@@ -35,10 +35,7 @@ public class BetUtil {
 
                 // convert `CsvToBean` object to list of bets
                 List<Bet> parsedBets = csvToBean.parse();
-                convertedBetCollectionRequest = BetCollectionRequest.builder().bets(parsedBets).build();
-
-//                System.out.println(convertedBetCollectionRequest.get(0));
-//                System.out.println(convertedBetCollectionRequest.get(1));
+                convertedBetCollectionRequest = convertBetListToBetCollectionRequest(parsedBets);
 
             } catch (Exception ex) {
                 convertedBetCollectionRequest = null;
@@ -46,5 +43,9 @@ public class BetUtil {
             }
         }
         return convertedBetCollectionRequest;
+    }
+
+    public static BetCollectionRequest convertBetListToBetCollectionRequest(List<Bet> betList) {
+        return BetCollectionRequest.builder().bets(betList).build();
     }
 }

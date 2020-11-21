@@ -1,25 +1,18 @@
 package com.punter.moneybags.controller;
 
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
 import com.punter.moneybags.model.Bet;
 import com.punter.moneybags.model.request.BetCollectionRequest;
 import com.punter.moneybags.service.BetService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.List;
-import java.util.Objects;
 
 import static com.punter.moneybags.util.BetUtil.convertCSVToBetCollectionRequest;
+import static com.punter.moneybags.util.BetUtil.convertBetListToBetCollectionRequest;
 import static java.util.Objects.isNull;
-import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 public class BetController {
@@ -52,30 +45,28 @@ public class BetController {
 //        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
 //    }
 
-//    @PostMapping("/upload-csv-file")
-////    @PostMapping(value = "/upload-csv-file", consumes = {MediaType.APPLICATION_JSON})
-//    public String uploadCSVFile(@RequestParam("file") MultipartFile uploadedFile) {
-//        BetCollectionRequest betCollectionRequest = convertCSVToBetCollectionRequest(uploadedFile);
-//
-//        if (!isNull(betCollectionRequest)) {
-//            System.out.println("OH NO!OO");
-//            betService.calculateLiability(betCollectionRequest);
-//        } else {
-//            System.out.println("WOO");
-//        }
-//
-//        return "cv-uploaded";
-//    }
+    @PostMapping("/post-csv")
+//    @PostMapping(value = "/upload-csv-file", consumes = {MediaType.APPLICATION_JSON})
+    public String postCSV(@RequestParam("file") MultipartFile uploadedFile) {
+        BetCollectionRequest betCollectionRequest = convertCSVToBetCollectionRequest(uploadedFile);
 
-    @PostMapping("/upload-csv-file")
-//    @PostMapping(value = "/upload-csv-file", consumes = ({APPLICATION_JSON}))
-    public String uploadJSONFile(@RequestBody BetCollectionRequest betCollectionRequest) {
-        System.out.println(betCollectionRequest);
-//        BetCollectionRequest betCollectionRequest = convertCSVToBetCollectionRequest(uploadedFile);
+        if (!isNull(betCollectionRequest)) {
+            System.out.println("WOO");
+            betService.calculateLiability(betCollectionRequest);
+        } else {
+            System.out.println("OH NO!OO. Bad Request!");
+        }
 
+        return "cv-upload";
+    }
 
+    @PostMapping(value = "/post-json", consumes = APPLICATION_JSON_VALUE)
+    public String postJSON(@RequestBody List<Bet> betCollectionRequestBody) {
+        BetCollectionRequest betCollectionRequest = convertBetListToBetCollectionRequest(betCollectionRequestBody);
 
-        return "json-upload-status";
+        betService.calculateLiability(betCollectionRequest);
+
+        return "json-post";
     }
 
 }
