@@ -1,7 +1,8 @@
 package com.punter.moneybags.service;
 
-import static com.punter.moneybags.util.BetUtil.convertRequestToReport;
+import static com.punter.moneybags.util.BetUtil.processRequestToReportOne;
 import static com.punter.moneybags.util.BetUtil.countTotalMatchesForPredicate;
+import static com.punter.moneybags.util.BetUtil.processRequestToReportTwo;
 
 import com.punter.moneybags.model.dao.LiabilityEntry;
 import com.punter.moneybags.model.dao.SelectionLiabilityReportOne;
@@ -30,7 +31,10 @@ public class BetService implements BetRepository {
 //                    .build();
 //                });
 
-    convertRequestToReport(betCollectionRequest);
+//    processRequestToReportOne(betCollectionRequest);
+    processRequestToReportTwo(betCollectionRequest);
+
+
     return null;
   }
 
