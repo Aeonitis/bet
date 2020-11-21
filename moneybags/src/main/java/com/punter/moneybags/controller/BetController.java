@@ -4,6 +4,8 @@ import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.punter.moneybags.model.Bet;
 import com.punter.moneybags.model.request.BetCollectionRequest;
+import com.punter.moneybags.service.BetService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,9 +17,16 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.List;
+import java.util.Objects;
+
+import static com.punter.moneybags.util.BetUtil.convertCSVToBetCollectionRequest;
+import static java.util.Objects.isNull;
 
 @RestController
 public class BetController {
+
+    @Autowired
+    BetService betService;
 
     @RequestMapping("/")
     public String getBetReports() {
@@ -43,42 +52,17 @@ public class BetController {
 //        message = "Please upload a csv file!";
 //        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseMessage(message));
 //    }
-    
-    @PostMapping("/upload-csv-file")
-    public String uploadCSVFile(@RequestParam("file") MultipartFile file, Model model) {
 
-        // validate file
-        if (file.isEmpty()) {
-            model.addAttribute("message", "Please select a CSV file to upload.");
-            model.addAttribute("status", false);
-        } else {
+    @PostMapping(value = "/upload-csv-file", consumes = {"text/csv"})
+    public String uploadCSVFile(@RequestParam("file") MultipartFile uploadedFile) {
+        BetCollectionRequest betCollectionRequest = convertCSVToBetCollectionRequest(uploadedFile);
 
-            // parse CSV file to create a list of `User` objects
-            try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
-
-                // create csv bean reader
-                CsvToBean<Bet> csvToBean = new CsvToBeanBuilder(reader)
-                        .withType(Bet.class)
-                        .withIgnoreLeadingWhiteSpace(true)
-                        .build();
-
-                // convert `CsvToBean` object to list of users
-                List<Bet> betCollectionRequests = csvToBean.parse();
-                System.out.println(betCollectionRequests.get(0));
-                System.out.println(betCollectionRequests.get(1));
-                System.out.println(betCollectionRequests.get(2));
-
-                // save users list on model
-                model.addAttribute("bets", betCollectionRequests);
-                model.addAttribute("status", true);
-
-            } catch (Exception ex) {
-                model.addAttribute("message", "An error occurred while processing the CSV file.");
-                model.addAttribute("status", false);
-            }
+        if (!isNull(betCollectionRequest)) {
+            betService.calculateLiability(betCollectionRequest);
         }
 
         return "file-upload-status";
     }
+
 
 }
