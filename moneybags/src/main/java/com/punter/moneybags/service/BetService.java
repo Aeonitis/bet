@@ -10,6 +10,7 @@ public class BetService implements BetRepository {
 
     @Override
     public LiabilityResponse calculateLiability(BetCollectionRequest betCollectionRequest) {
+        printRequest(betCollectionRequest);
         return null;
     }
 
@@ -17,4 +18,9 @@ public class BetService implements BetRepository {
     public TotalLiabilityResponse calculateTotalLiability(BetCollectionRequest betCollectionRequest) {
         return null;
     }
+
+    private void printRequest(BetCollectionRequest betCollectionRequestToPrint) {
+        System.out.println(betCollectionRequestToPrint.toString());
+    }
+
 }

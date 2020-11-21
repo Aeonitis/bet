@@ -36,13 +36,13 @@ public class BetUtil {
                 // convert `CsvToBean` object to list of bets
                 List<Bet> parsedBets = csvToBean.parse();
                 convertedBetCollectionRequest = BetCollectionRequest.builder().bets(parsedBets).build();
-//                System.out.println(convertedBetCollectionRequest);
+
+//                System.out.println(convertedBetCollectionRequest.get(0));
 //                System.out.println(convertedBetCollectionRequest.get(1));
-//                System.out.println(convertedBetCollectionRequest.get(2));
 
             } catch (Exception ex) {
                 convertedBetCollectionRequest = null;
-                // TODO: Exception for Error occurred while processing the CSV multipartFile."
+                // TODO: Maybe just return null. No exc needed. Exception for Error occurred while processing the CSV multipartFile.
             }
         }
         return convertedBetCollectionRequest;
