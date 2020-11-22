@@ -1,6 +1,7 @@
 package com.punter.moneybags.model.dao;
 
-import java.math.BigDecimal;
+import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvBindByPosition;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -14,10 +15,24 @@ import lombok.ToString;
 @ToString
 public class SelectionLiabilityEntry {
 
+  @CsvBindByName(column = "Selection Name", required = true)
+  @CsvBindByPosition(position = 0)
   private String selectionName;
+
+  @CsvBindByName(column = "Currency", required = true)
+  @CsvBindByPosition(position = 1)
   private String currency;
+
+  @CsvBindByName(column = "Num Bets", required = true)
+  @CsvBindByPosition(position = 2)
   private int totalBets;
+
+  @CsvBindByName(column = "Total Stakes", required = true)
+  @CsvBindByPosition(position = 3)
   private String totalStakes;
+
+  @CsvBindByName(column = "Total Liability", required = true)
+  @CsvBindByPosition(position = 4)
   private String totalLiability;
 
 }

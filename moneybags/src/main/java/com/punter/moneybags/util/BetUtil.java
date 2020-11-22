@@ -6,6 +6,8 @@ import static com.punter.moneybags.model.constant.CurrencyCode.appendSymbolWithA
 import static com.punter.moneybags.model.constant.CurrencyCode.currencyOfAlpha3IsoCode;
 import static com.punter.moneybags.util.BaseUtil.distinctByKey;
 import static com.punter.moneybags.util.BaseUtil.roundToTwoDecimalPoints;
+import static com.punter.moneybags.util.helper.csv.BeanToCsvWriter.writeReportOneToFile;
+import static com.punter.moneybags.util.helper.csv.BeanToCsvWriter.writeReportTwoToFile;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.trim;
 
@@ -184,11 +186,12 @@ public class BetUtil {
 
     System.out.println("Printing Report One...");
     selectionLiabilityReportOne.printReportToConsole();
+    writeReportOneToFile(selectionLiabilityEntries);
 
   }
 
   /**
-   * Report two (Per currency)
+   * Report two (Per-currency totals)
    *
    * @param betCollectionRequest
    */
@@ -237,6 +240,8 @@ public class BetUtil {
 
     System.out.println("Printing Report Two...");
     selectionLiabilityReportTwo.printReportToConsole();
+    writeReportTwoToFile(liabilityEntries);
+
     testHere();
   }
 

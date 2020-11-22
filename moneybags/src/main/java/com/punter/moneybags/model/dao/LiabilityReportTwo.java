@@ -13,7 +13,7 @@ public class LiabilityReportTwo {
 
   private List<LiabilityEntry> liabilityEntryList;
 
-  private static final String[] columns = {
+  private static final String[] TABLE_COLUMNS = {
       "Currency",
       "No Of Bets",
       "Total Stakes",
@@ -24,14 +24,14 @@ public class LiabilityReportTwo {
     Object[][] data = new Object[liabilityEntryList.size()][];
     for (int i = 0; i < liabilityEntryList.size(); i++) {
       LiabilityEntry liabilityEntry = liabilityEntryList.get(i);
-      data[i] = new Object[columns.length];
+      data[i] = new Object[TABLE_COLUMNS.length];
       data[i][0] = liabilityEntry.getCurrency();
       data[i][1] = liabilityEntry.getTotalBets();
       data[i][2] = liabilityEntry.getTotalStakes();
       data[i][3] = liabilityEntry.getTotalLiability();
     }
 
-    TextTable textTable = new TextTable(columns, data);
+    TextTable textTable = new TextTable(TABLE_COLUMNS, data);
     textTable.printTable();
     System.out.println("-------------------");
     System.out.println("No. of entries: " + liabilityEntryList.size());
