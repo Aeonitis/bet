@@ -2,12 +2,17 @@ package com.punter.moneybags.model.constant;
 
 import java.math.BigDecimal;
 
-
+/**
+ * TODO: Future consideration https://stackoverflow.com/questions/10536899/how-to-set-customize-currency-in-java
+ * no euro sign character in ISO 8859-1; it was introduced in ISO 8859-15
+ */
 public enum CurrencyCode {
 
-  EUR("â‚¬"),
+  //  EUR("â‚¬"),
+  //  GBP("Â£"),
+  EUR("€"),
   USD("$"),
-  GBP("Â£");
+  GBP("£");
 
   private String symbol;
 

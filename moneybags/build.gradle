@@ -22,9 +22,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
-//	compile "com.opencsv:opencsv:5.0"
-    compile group: 'com.opencsv', name: 'opencsv', version: '5.0'
+	compile "com.opencsv:opencsv:5.0"
+//    compile group: 'com.opencsv', name: 'opencsv', version: '5.0'
     compile 'com.massisframework:j-text-utils:0.3.4'
+    compile "org.javamoney:moneta:1.4.2"
+
 
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

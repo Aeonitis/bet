@@ -29,13 +29,13 @@ public class BetController {
   }
 
   @PostMapping("/post-csv")
-//    @PostMapping(value = "/upload-csv-file", consumes = {MediaType.APPLICATION_JSON})
   public String postCSV(@RequestParam("file") MultipartFile uploadedFile) {
     BetCollectionRequest betCollectionRequest = convertCSVToBetCollectionRequest(uploadedFile);
 
     if (!isNull(betCollectionRequest)) {
       System.out.println("WOO");
       betService.calculateSelectionLiability(betCollectionRequest);
+      betService.calculateLiability(betCollectionRequest);
     } else {
       System.out.println("OH NO!OO. Bad Request!");
     }
@@ -49,6 +49,7 @@ public class BetController {
         betCollectionRequestBody);
 
     betService.calculateSelectionLiability(betCollectionRequest);
+    betService.calculateLiability(betCollectionRequest);
 
     return "json-post";
   }

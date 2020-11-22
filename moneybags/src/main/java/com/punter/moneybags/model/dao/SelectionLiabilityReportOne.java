@@ -1,14 +1,17 @@
 package com.punter.moneybags.model.dao;
 
+import com.punter.moneybags.model.dto.SelectionLiabilityEntry;
 import dnl.utils.text.table.TextTable;
 import java.util.List;
 import lombok.Builder;
+import lombok.Getter;
 
 /**
  * Report One: Shows selection liability by currency. Columns: Selection Name, Currency, Num Bets,
  * Total Stakes, Total Liability Order: By Currency and Total Liability, descending.
  */
 @Builder
+@Getter
 public class SelectionLiabilityReportOne {
 
   private List<SelectionLiabilityEntry> selectionLiabilityEntryList;
@@ -21,6 +24,12 @@ public class SelectionLiabilityReportOne {
       "Total Liability"
   };
 
+  /**
+   * Console has encoding issues to resolve, but work if using the following values below
+   *   EUR("â‚¬"),
+   *   GBP("Â£"),
+   *   in CurrencyCode class. I didn't use them coz Csv write works fine
+   */
   public void printReportToConsole() {
     Object[][] data = new Object[selectionLiabilityEntryList.size()][];
     for (int i = 0; i < selectionLiabilityEntryList.size(); i++) {

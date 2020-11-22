@@ -1,14 +1,17 @@
 package com.punter.moneybags.model.dao;
 
+import com.punter.moneybags.model.dto.LiabilityEntry;
 import dnl.utils.text.table.TextTable;
 import java.util.List;
 import lombok.Builder;
+import lombok.Getter;
 
 /**
  * Report Two: Shows total liability by currency. Columns: Currency, Num Bets, Total Stakes, Total
  * Liability
  */
 @Builder
+@Getter
 public class LiabilityReportTwo {
 
   private List<LiabilityEntry> liabilityEntryList;
