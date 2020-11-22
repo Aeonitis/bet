@@ -12,12 +12,12 @@ Work Done:
 - Unit tests (not enough)
 
 
-To upload a csv file via curl POST:
+To upload a csv file [source.csv](https://github.com/Aeonitis/bet/blob/main/moneybags/src/main/resources/static/source.csv) via curl POST:
 ```sh
 curl -F file=@"source.csv" http://localhost:8080/post-csv
 ```
 
-To POST a JSON file as a request:
+To POST a JSON file [source.json](https://github.com/Aeonitis/bet/blob/main/moneybags/src/main/resources/static/source.json) as a request:
 ```sh
 curl -vX POST http://localhost:8080/post-json -d @source.json --header "Content-Type: application/json"
 ```
@@ -27,7 +27,7 @@ Output Reports/Resulting CSVs:
 - [ReportTwo](https://github.com/Aeonitis/bet/blob/main/moneybags/ReportTwo.csv)
 
 Todos, Extras to consider in future:
-- More Exceptionhandling
+- More Exception handling
 - More Unit tests
 - More Field/Constraint Validators
 
