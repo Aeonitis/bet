@@ -24,9 +24,6 @@ public class BetService implements BetRepository {
       BetCollectionRequest betCollectionRequest) {
     SelectionLiabilityReportOne selectionLiabilityReportOne;
 
-//    processRequestToReportOne(betCollectionRequest);
-//    processRequestToReportTwo(betCollectionRequest);
-
     selectionLiabilityReportOne = processRequestToReportOne(betCollectionRequest);
 
     System.out.println("Printing Report One...");

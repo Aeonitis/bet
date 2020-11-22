@@ -9,7 +9,9 @@ import com.punter.moneybags.model.Bet;
 import com.punter.moneybags.model.request.BetCollectionRequest;
 import com.punter.moneybags.service.BetService;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,20 +46,14 @@ public class BetController {
   }
 
   @PostMapping(value = "/post-json", consumes = APPLICATION_JSON_VALUE)
-  public String postJSON(@RequestBody List<Bet> betCollectionRequestBody) {
+  public ResponseEntity<List<Bet>> postJSON(
+      @Valid @RequestBody List<Bet> betCollectionRequestBody) {
     BetCollectionRequest betCollectionRequest = convertBetListToBetCollectionRequest(
         betCollectionRequestBody);
 
     betService.calculateSelectionLiability(betCollectionRequest);
     betService.calculateLiability(betCollectionRequest);
 
-    return "json-post";
+    return ResponseEntity.ok(betCollectionRequestBody);
   }
-
-  // TODO: Validate fields at controller level
-  public boolean requestIsValid(BetCollectionRequest requestForFieldValidation) {
-    //    if(isNull(currencyOfAlpha3IsoCode())) {}
-    return false;
-  }
-
 }

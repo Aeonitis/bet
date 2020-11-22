@@ -14,23 +14,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class BaseUtil {
 
-//  final Double of = Double.valueOf("9876543.21");
-
-//  public void sam() {
-//    NumberFormat currencyInstance = NumberFormat.getCurrencyInstance(getLocaleFromISO("EUR"));
-//    System.out.println(currencyInstance.format(of));
-//  }
-
-
-//        ("test", currencyInstance.format(of));
-//  currencyInstance = NumberFormat.getCurrencyInstance(getLocalFromISO("GBP"));
-//    Log.d("test", currencyInstance.format(of));
-//  currencyInstance = NumberFormat.getCurrencyInstance(getLocalFromISO("SEK"));
-//    Log.d("test", currencyInstance.format(of));
-//  currencyInstance = NumberFormat.getCurrencyInstance(getLocalFromISO("USD"));
-//    Log.d("test", currencyInstance.format(of));
-
-  private Locale getLocaleFromISO(String iso4217code){
+  private Locale getLocaleFromISO(String iso4217code) {
     Locale toReturn = null;
     for (Locale locale : NumberFormat.getAvailableLocales()) {
       String code = NumberFormat.getCurrencyInstance(locale).

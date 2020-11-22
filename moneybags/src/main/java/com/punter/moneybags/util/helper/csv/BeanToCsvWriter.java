@@ -19,25 +19,6 @@ public class BeanToCsvWriter {
   private static final String REPORT_ONE_CSV_FILE_PATH = "./ReportOne.csv";
   private static final String REPORT_TWO_CSV_FILE_PATH = "./ReportTwo.csv";
 
-//  public static void writeReportOneToFileOLD(List<SelectionLiabilityEntry> writeReportOneList) {
-//
-//    try (
-//        Writer writer = Files.newBufferedWriter(Paths.get(REPORT_ONE_CSV_FILE_PATH));
-//    ) {
-//      StatefulBeanToCsv<SelectionLiabilityEntry> beanToCsv = new StatefulBeanToCsvBuilder(writer)
-//          .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER)
-//          .build();
-//
-//      beanToCsv.write(writeReportOneList);
-//    } catch (CsvRequiredFieldEmptyException e) {
-//      e.printStackTrace();
-//    } catch (CsvDataTypeMismatchException e) {
-//      e.printStackTrace();
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
-//  }
-
   public static void writeReportOneToFile(List<SelectionLiabilityEntry> writeReportOneList) {
     try {
 
@@ -82,13 +63,13 @@ public class BeanToCsvWriter {
     } catch (Exception e) {
       e.printStackTrace();
     } finally {
-        if (bufferedWriter != null) {
-          try {
-            bufferedWriter.close();
-          } catch (IOException e) {
-            e.printStackTrace();
-          }
+      if (bufferedWriter != null) {
+        try {
+          bufferedWriter.close();
+        } catch (IOException e) {
+          e.printStackTrace();
         }
+      }
 
     }
   }
