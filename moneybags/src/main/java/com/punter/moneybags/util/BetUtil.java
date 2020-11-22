@@ -1,6 +1,9 @@
 package com.punter.moneybags.util;
 
 import static com.punter.moneybags.model.constant.BetConstant.EUR_CURRENCY;
+import static com.punter.moneybags.model.constant.CurrencyCode.USD;
+import static com.punter.moneybags.model.constant.CurrencyCode.appendSymbolWithAmount;
+import static com.punter.moneybags.model.constant.CurrencyCode.currencyOfAlpha3IsoCode;
 import static com.punter.moneybags.util.BaseUtil.distinctByKey;
 import static com.punter.moneybags.util.BaseUtil.roundToTwoDecimalPoints;
 import static java.util.stream.Collectors.toList;
@@ -17,6 +20,7 @@ import com.punter.moneybags.model.request.BetCollectionRequest;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -93,23 +97,24 @@ public class BetUtil {
         .count();
   }
 
-  public static double sumOfStakesForPredicateMatch(List<Bet> bets, Predicate<Bet> betPredicate) {
+  public static BigDecimal sumOfStakesForPredicateMatch(List<Bet> bets,
+      Predicate<Bet> betPredicate) {
 
-    return bets.stream()
+    return BigDecimal.valueOf(bets.stream()
         .filter(betPredicate)
         .mapToDouble(Bet::getStake)
-        .sum();
+        .sum());
   }
 
-  public static double liabilityProductForPredicateMatch(List<Bet> bets,
+  public static BigDecimal liabilityProductForPredicateMatch(List<Bet> bets,
       Predicate<Bet> betPredicate) {
 
     final Supplier<ToDoubleFunction<Bet>> liabilityFunction =
         () -> bet -> (bet.getStake()) * (bet.getPrice());
-    return bets.stream()
+    return BigDecimal.valueOf(bets.stream()
         .filter(betPredicate)
         .mapToDouble(liabilityFunction.get())
-        .sum();
+        .sum());
   }
 
   // TODO: Use Pair class
@@ -146,38 +151,45 @@ public class BetUtil {
           int totalBetsForNameCurrency = (int) countTotalMatchesForPredicate(
               betCollectionRequest.getBets(), nameAndCurrencyPredicate);
 
-          double sumOfStakesForNameCurrency = sumOfStakesForPredicateMatch(
-              betCollectionRequest.getBets(), nameAndCurrencyPredicate);
+          BigDecimal sumOfStakesForNameCurrency = roundToTwoDecimalPoints(
+              sumOfStakesForPredicateMatch(
+                  betCollectionRequest.getBets(), nameAndCurrencyPredicate));
 
-          double sumOfLiabilitiesForNameCurrency = liabilityProductForPredicateMatch(
-              betCollectionRequest.getBets(), nameAndCurrencyPredicate);
+          BigDecimal sumOfLiabilitiesForNameCurrency = roundToTwoDecimalPoints(
+              liabilityProductForPredicateMatch(
+                  betCollectionRequest.getBets(), nameAndCurrencyPredicate));
 
           SelectionLiabilityEntry newEntry = SelectionLiabilityEntry.builder()
               .selectionName(currentName)
               .currency(currentCurrency)
               .totalBets(totalBetsForNameCurrency)
-              .totalStakes(sumOfStakesForNameCurrency)
-              .totalLiability(roundToTwoDecimalPoints(sumOfLiabilitiesForNameCurrency))
+              .totalStakes(appendSymbolWithAmount(currencyOfAlpha3IsoCode(currentCurrency),
+                  (sumOfStakesForNameCurrency)))
+              .totalLiability(appendSymbolWithAmount(currencyOfAlpha3IsoCode(currentCurrency),
+                  (sumOfLiabilitiesForNameCurrency)))
               .build();
 
           selectionLiabilityEntries.add(newEntry);
         });
 
-    System.out.println(selectionLiabilityEntries);
+//    System.out.println(selectionLiabilityEntries);
 
 //        SelectionLiabilityEntry selectionLiabilityReport =
 //                SelectionLiabilityEntry.builder()
 //                        .selectionName(betCollectionRequest)
 //                        .build();
 
-    SelectionLiabilityReportOne selectionLiabilityReportOne;
-    selectionLiabilityReportOne = SelectionLiabilityReportOne.builder()
+    SelectionLiabilityReportOne selectionLiabilityReportOne = SelectionLiabilityReportOne.builder()
         .selectionLiabilityEntryList(selectionLiabilityEntries).build();
+
+    System.out.println("Printing Report One...");
+    selectionLiabilityReportOne.printReportToConsole();
 
   }
 
   /**
    * Report two (Per currency)
+   *
    * @param betCollectionRequest
    */
   public static void processRequestToReportTwo(BetCollectionRequest betCollectionRequest) {
@@ -186,38 +198,53 @@ public class BetUtil {
     List<Bet> betsWithDistinctCurrencyValues = extractDistinctBetsForCurrencyValues(
         betCollectionRequest.getBets());
 
-    System.out.println("bets Distinct: " + betsWithDistinctCurrencyValues.size());
+//    System.out.println("bets Distinct: " + betsWithDistinctCurrencyValues.size());
 
     betsWithDistinctCurrencyValues.forEach(
         eachDistinctCurrency -> {
           String currentCurrency = eachDistinctCurrency.getCurrency();
+
           Predicate<Bet> currencyPredicateMatch = currentCurrencyBet ->
               currentCurrencyBet.getCurrency().equals(currentCurrency);
 
           int totalBetsMatchingCurrency = (int) countTotalMatchesForPredicate(
               betCollectionRequest.getBets(), currencyPredicateMatch);
 
-          double sumOfStakesMatchingCurrency = sumOfStakesForPredicateMatch(
-              betCollectionRequest.getBets(), currencyPredicateMatch);
+          BigDecimal sumOfStakesMatchingCurrency = roundToTwoDecimalPoints(
+              sumOfStakesForPredicateMatch(
+                  betCollectionRequest.getBets(), currencyPredicateMatch));
 
-          double sumOfLiabilitiesMatchingCurrency = liabilityProductForPredicateMatch(
-              betCollectionRequest.getBets(), currencyPredicateMatch);
+          BigDecimal sumOfLiabilitiesMatchingCurrency = roundToTwoDecimalPoints(
+              liabilityProductForPredicateMatch(
+                  betCollectionRequest.getBets(), currencyPredicateMatch));
 
           LiabilityEntry newEntry = LiabilityEntry.builder()
               .currency(currentCurrency)
               .totalBets(totalBetsMatchingCurrency)
-              .totalStakes(roundToTwoDecimalPoints(sumOfStakesMatchingCurrency))
-              .totalLiability(roundToTwoDecimalPoints(sumOfLiabilitiesMatchingCurrency))
+              .totalStakes(appendSymbolWithAmount(currencyOfAlpha3IsoCode(currentCurrency),
+                  sumOfStakesMatchingCurrency))
+              .totalLiability(appendSymbolWithAmount(currencyOfAlpha3IsoCode(currentCurrency),
+                  sumOfLiabilitiesMatchingCurrency))
               .build();
 
           liabilityEntries.add(newEntry);
         });
 
-    System.out.println(liabilityEntries);
+//    System.out.println(liabilityEntries);
 
-    LiabilityReportTwo selectionLiabilityReportTwo;
-    selectionLiabilityReportTwo = LiabilityReportTwo.builder()
+    LiabilityReportTwo selectionLiabilityReportTwo = LiabilityReportTwo.builder()
         .liabilityEntryList(liabilityEntries).build();
 
+    System.out.println("Printing Report Two...");
+    selectionLiabilityReportTwo.printReportToConsole();
+    testHere();
+  }
+
+  public static void testHere() {
+    System.out.println(currencyOfAlpha3IsoCode("GBP").getSymbol());
+    System.out.println(currencyOfAlpha3IsoCode("USD").getSymbol());
+    System.out.println(currencyOfAlpha3IsoCode("EUR").getSymbol());
+    System.out.println(currencyOfAlpha3IsoCode("eur").getSymbol());
+    System.out.println(appendSymbolWithAmount(USD, new BigDecimal(234235235.90)));
   }
 }

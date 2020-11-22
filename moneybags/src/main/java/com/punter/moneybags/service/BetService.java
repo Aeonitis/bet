@@ -1,8 +1,9 @@
 package com.punter.moneybags.service;
 
+import static com.punter.moneybags.model.constant.CurrencyCode.currencyOfAlpha3IsoCode;
 import static com.punter.moneybags.util.BetUtil.processRequestToReportOne;
-import static com.punter.moneybags.util.BetUtil.countTotalMatchesForPredicate;
 import static com.punter.moneybags.util.BetUtil.processRequestToReportTwo;
+import static java.util.Objects.isNull;
 
 import com.punter.moneybags.model.dao.LiabilityEntry;
 import com.punter.moneybags.model.dao.SelectionLiabilityReportOne;
@@ -15,25 +16,13 @@ public class BetService implements BetRepository {
   @Override
   public SelectionLiabilityReportOne calculateSelectionLiability(
       BetCollectionRequest betCollectionRequest) {
-    printRequest(betCollectionRequest);
-    SelectionLiabilityReportOne selectionLiabilityReportOne;
+//    SelectionLiabilityReportOne selectionLiabilityReportOne;
 
-//    System.out.println(countTotalMatchesForPredicate(betCollectionRequest.getBets()));
 
-//        betCollectionRequest.getBets().forEach(eachEntry -> {
-//            SelectionLiabilityEntry.builder()
-//                    .selectionName(eachEntry.getSelectionName())
-//                    .currency(eachEntry.getCurrency())
-//
-////                    .totalBets(eachEntry.get)
-////                    .totalStakes(eachEntry.get)
-////                    .totalLiability(eachEntry.get)
-//                    .build();
-//                });
 
-//    processRequestToReportOne(betCollectionRequest);
+
+    processRequestToReportOne(betCollectionRequest);
     processRequestToReportTwo(betCollectionRequest);
-
 
     return null;
   }

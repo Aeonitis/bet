@@ -1,5 +1,6 @@
 package com.punter.moneybags.model.dao;
 
+import java.math.BigDecimal;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -14,6 +15,6 @@ public class LiabilityEntry {
 
   private String currency;
   private int totalBets;
-  private double totalStakes;
-  private double totalLiability;
+  private String totalStakes;
+  private String totalLiability;
 }

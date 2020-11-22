@@ -53,4 +53,10 @@ public class BetController {
     return "json-post";
   }
 
+  // TODO: Validate fields at controller level
+  public boolean requestIsValid(BetCollectionRequest requestForFieldValidation) {
+    //    if(isNull(currencyOfAlpha3IsoCode())) {}
+    return false;
+  }
+
 }
